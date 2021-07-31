@@ -229,6 +229,7 @@ contract WrappedNengcoin is PausableToken {
     string public name;
     string public symbol;
     uint public decimals;
+    uint256 public maxTotalSupply;
     event Mint(address indexed from, address indexed to, uint256 value);
     event Burn(address indexed burner, uint256 value);
 
@@ -237,6 +238,7 @@ contract WrappedNengcoin is PausableToken {
         name = _name;
         symbol = _symbol;
         decimals = _decimals;
+        maxTotalSupply = 740000001 * 10**_decimals;     // 740 million supply cap
         totalSupply = _supply * 10**_decimals;
         balances[tokenOwner] = totalSupply;
         owner = tokenOwner;
@@ -258,6 +260,7 @@ contract WrappedNengcoin is PausableToken {
     function mint(address account, uint256 amount) onlyOwner public {
 
         totalSupply = totalSupply.add(amount);
+        require(totalSupply <= maxTotalSupply || maxTotalSupply == 0, 'trying to mint too many tokens!');
         balances[account] = balances[account].add(amount);
         emit Mint(address(0), account, amount);
         emit Transfer(address(0), account, amount);
