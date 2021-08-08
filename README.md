@@ -14,6 +14,8 @@ Wrapped Nengcoin is wrapped token on binance smart chain (BSC) with 1:1 backing 
 Major release version:
  - v1.0.0
 
+BSC Contract Address: 0xaD2c0B5ee5424C6b6f9C06E4fEF3FD7CD9FF0264
+
 License
 -------
 
